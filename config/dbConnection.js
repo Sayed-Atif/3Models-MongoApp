@@ -8,12 +8,13 @@ const dbConnection = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
-        console.log(`MongoDB Connected: ${conn.connection.host}`);
+        console.log(`Connected to MongoDB Cluster: ${conn.connection.host}`);
     } catch (error) {
         console.error(`Error: ${error.message}`);
         process.exit(1);
     }
 }
+
 
 
 

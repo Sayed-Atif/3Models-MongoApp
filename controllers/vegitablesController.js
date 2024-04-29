@@ -1,61 +1,72 @@
 // Routes for vegitables to perform CRUD operations on vegitables:
 const express = require('express');
-const router = express.Router();
+// const router = express.Router();
 const mongoose = require('mongoose');
 const dbConnection = require('../config/dbConnection');
 const Vegitable = require('../models/vegitable');
 
 
-// const vegitablesController = (app) => {   // function to create routes for vegitables (we can use this function in server.js or index.js)
-
-//     app.use('/api/vegitables', router);
-// }
-
-
-router.post('/', async (req, res) => {      // create/post a new vegitable in MongoDB database 
-    const { name, color, taste, rootVegitable } = req.body;
-    const newVegitable = new Vegitable({
-        name,
-        color,
-        taste,
-        rootVegitable
-    });
-    await newVegitable.save();
-    res.send(newVegitable);
-})
+const createVegitable = async (req, res) => {  // create a new vegitable in the database
+    try {
+        const { name, color, taste, rootVegitable } = req.body;
+        const newVegitable = new Vegitable({
+            name,
+            color,
+            taste,
+            rootVegitable
+        });
+        await newVegitable.save();
+        res.send(newVegitable);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
 
 
-router.get('/', async (req, res) => {   // get all vegitables from the database
-    const vegitables = await Vegitable.find();
-    res.send(vegitables);
-})
+const getVegitables = async (req, res) => {  // get all vegitables from the database
+    try {
+        const vegitables = await Vegitable.find();
+        res.send(vegitables);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
 
 
-router.get('/:id', async (req, res) => {      // get a specific vegitable from the database
-    const vegitable = await Vegitable.findById(req.params.id);
-    res.send(vegitable);
-})
+const getVegitable = async (req, res) => {  // get a specific vegitable from the database
+    try {
+        const vegitable = await Vegitable.findById(req.params.id);
+        res.send(vegitable);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
 
 
-router.put('/:id', async (req, res) => {      // update an existing vegitable in the database
-    const { name, color, taste, rootVegitable } = req.body;
-    const updatedVegitable = await Vegitable.findByIdAndUpdate(req.params.id, {
-        name,
-        color,
-        taste,
-        rootVegitable
-    }, { new: true });
-    res.send(updatedVegitable);
-})
+const updateVegitable = async (req, res) => {   // update an existing vegitable in the database
+    try {
+        const { name, color, taste, rootVegitable } = req.body;
+        const updatedVegitable = await Vegitable.findByIdAndUpdate(req.params.id, {
+            name,
+            color,
+            taste,
+            rootVegitable
+        }, { new: true });
+        res.send(updatedVegitable);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
 
 
+const deleteVegitable = async (req, res) => {   // delete a specific vegitable from the MongoDB database
+    try {
+        const deletedVegitable = await Vegitable.findByIdAndDelete(req.params.id);
+        res.send(deletedVegitable);
+    } catch (error) {
+        res.status(500).send(error);
+    }
+}
 
-router.delete('/:id', async (req, res) => {      // delete a specific vegitable from the MongoDB database
-    const deletedVegitable = await Vegitable.findByIdAndDelete(req.params.id);
-    res.send(deletedVegitable);
-})
 
-
-
-
-module.exports = router
+module.exports = { createVegitable, getVegitables, getVegitable, updateVegitable, deleteVegitable }

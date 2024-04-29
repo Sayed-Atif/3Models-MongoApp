@@ -4,6 +4,7 @@ const mongoose = require('mongoose');  // import mongoose module for schema crea
 const fruitSchema = new mongoose.Schema({
     name: String,
     color: String,
+    price: Number,
     readyToEat: Boolean
 })
 
