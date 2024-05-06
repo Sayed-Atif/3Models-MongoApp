@@ -1,7 +1,7 @@
 {
   "name": "mongodb-database-app",
   "version": "1.0.0",
-  "description": "SBA-319: MongoDB Database App",
+  "description": "3 Models MongoDB App",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

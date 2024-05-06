@@ -1,4 +1,4 @@
-// Schema definition for Animal model in MongoDB database:
+// Schema definition for Animal model:
 
 const mongoose = require('mongoose');  // import mongoose module for schema creation
 

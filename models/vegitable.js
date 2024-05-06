@@ -1,4 +1,4 @@
-// Schema definition for Vegitable model in MongoDB database:
+// Schema definition for Vegitable model:
 const mongoose = require('mongoose');  // import mongoose module for schema creation
 
 const vegitableSchema = new mongoose.Schema({    

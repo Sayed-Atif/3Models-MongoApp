@@ -1,4 +1,4 @@
-// Schema definition for Fruit model in MongoDB database:
+// Schema definition for Fruit model:
 const mongoose = require('mongoose');  // import mongoose module for schema creation
 
 const fruitSchema = new mongoose.Schema({
